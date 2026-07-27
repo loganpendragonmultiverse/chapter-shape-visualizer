@@ -19,7 +19,7 @@ def _chapter_shape(data: dict[str, Any]) -> dict[str, Any]:
     parts = re.split("(?m)^#\\s+(.+?)\\s*$", text)
     if len(parts) == 1:
         parts = ["", "Untitled", text]
-    chapters = []
+    chapters: list[dict[str, Any]] = []
     for index in range(1, len(parts), 2):
         body = parts[index + 1]
         words = re.findall("\\b[\\w'-]+\\b", body)
@@ -35,7 +35,8 @@ def _chapter_shape(data: dict[str, Any]) -> dict[str, Any]:
         )
     maximum = max(item["words"] for item in chapters) or 1
     for chapter in chapters:
-        chapter["bar"] = "#" * max(1, round(chapter["words"] / maximum * 20))
+        word_count = int(chapter["words"])
+        chapter["bar"] = "#" * max(1, round(word_count / maximum * 20))
     return {"chapters": chapters}
 
 
