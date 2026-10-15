@@ -3,3 +3,7 @@
 Measure chapter length, scene count, dialogue share, and structural rhythm from supplied manuscript text.
 
 Preserve deterministic, source-safe behavior and the interpretation boundary documented in the README. Every feature release must update tests, version metadata, `CHANGELOG.md`, README claims and limitations, repository metadata, release assets, and the Forge catalog together.
+
+## Milestone feature contract
+
+Compare unique exact headings; retain duplicate and renamed headings as unpaired review rows. Test measurements, markers, quotes, Unicode and source immutability. No inference or source rewriting.
