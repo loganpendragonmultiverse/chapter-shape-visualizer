@@ -60,5 +60,5 @@ def test_cli_comparison_preserves_sources(tmp_path, capsys):
 
 def test_malformed_comparison_drafts_reject():
     for bad in ([], {"text": 7}, {}, {"text": ""}):
-        with pytest.raises(ValueError):
+        with pytest.raises((ValueError, TypeError)):
             compare_drafts(bad, {"text": "# One\na"})

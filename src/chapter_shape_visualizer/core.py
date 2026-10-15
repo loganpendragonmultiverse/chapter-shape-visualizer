@@ -16,9 +16,11 @@ def _require(data: dict[str, Any], key: str) -> Any:
 
 
 def _chapter_shape(data: dict[str, Any]) -> dict[str, Any]:
-    if not isinstance(data, dict) or not isinstance(data.get("text"), str):
-        raise ValueError("draft must be an object with text string")
-    text = str(_require(data, "text"))
+    if not isinstance(data, dict):
+        raise TypeError("draft must be an object with text string")
+    text = _require(data, "text")
+    if not isinstance(text, str):
+        raise TypeError("draft text must be a string")
     parts = re.split(r"(?m)^#[ \t]+(.+?)[ \t]*$", text)
     if len(parts) == 1:
         parts = ["", "Untitled", text]
