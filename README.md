@@ -55,3 +55,5 @@ heading is not a chapter. Chapters start at Markdown `# ` headings; standalone
 `***` (with optional spaces) and `---` mark scenes. Dialogue share remains a
 quote-based estimate, including multiline quotes. It cannot identify speakers or
 validate narrative rhythm. Both drafts are read locally and never modified.
+
+Draft measurement normalizes LF, CRLF and CR line endings in memory. A supplied `--compare` file must contain a draft object; JSON `null` or another malformed value rejects rather than disabling comparison.

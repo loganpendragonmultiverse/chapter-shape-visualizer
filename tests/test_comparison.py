@@ -62,3 +62,33 @@ def test_malformed_comparison_drafts_reject():
     for bad in ([], {"text": 7}, {}, {"text": ""}):
         with pytest.raises((ValueError, TypeError)):
             compare_drafts(bad, {"text": "# One\na"})
+
+
+@pytest.mark.parametrize("marker", ["***", "---"])
+@pytest.mark.parametrize("ending", ["\n", "\r\n", "\r"])
+def test_line_endings_preserve_scene_counts_and_comparison(marker, ending):
+    text = f'# One\n"a"\n{marker}\nb\n# Two\nc\n'
+    supplied = text.replace("\n", ending)
+    data = {"text": supplied}
+    report = analyze(data, before={"text": text})
+    assert [chapter["scenes"] for chapter in report["chapters"]] == [2, 1]
+    assert [row["status"] for row in report["comparison"]] == ["unchanged", "unchanged"]
+    assert data["text"] == supplied
+
+
+@pytest.mark.parametrize("payload", [None, False, [], {"text": None}])
+def test_provided_malformed_comparison_cannot_disable_comparison(tmp_path, capsys, payload):
+    source = tmp_path / "new.json"
+    before = tmp_path / "old.json"
+    output = tmp_path / "report.json"
+    source.write_text(json.dumps({"text": "# One\na"}), encoding="utf-8")
+    before.write_text(json.dumps(payload), encoding="utf-8")
+    original = (source.read_bytes(), before.read_bytes())
+    assert (
+        main([str(source), "--compare", str(before), "--format", "json", "--output", str(output)])
+        == 2
+    )
+    captured = capsys.readouterr()
+    assert captured.out == "" and "error:" in captured.err
+    assert not output.exists()
+    assert (source.read_bytes(), before.read_bytes()) == original

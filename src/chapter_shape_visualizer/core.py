@@ -21,6 +21,7 @@ def _chapter_shape(data: dict[str, Any]) -> dict[str, Any]:
     text = _require(data, "text")
     if not isinstance(text, str):
         raise TypeError("draft text must be a string")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
     parts = re.split(r"(?m)^#[ \t]+(.+?)[ \t]*$", text)
     if len(parts) == 1:
         parts = ["", "Untitled", text]

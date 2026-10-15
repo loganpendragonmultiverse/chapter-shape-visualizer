@@ -22,6 +22,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         data = json.loads(args.input.read_text(encoding="utf-8"))
         before = json.loads(args.compare.read_text(encoding="utf-8")) if args.compare else None
+        if args.compare is not None and not isinstance(before, dict):
+            raise TypeError("comparison draft must be a JSON object with a text field")
         report = analyze(data, before=before)
         rendered = render_json(report) if args.format == "json" else render_markdown(report)
         if args.output:
