@@ -38,3 +38,20 @@ python -m build
 The project is feature-complete for its documented v1 scope. Maintenance focuses on correctness, security, compatibility, and well-supported input improvements.
 
 Part of the [Logan Pendragon Forge open-source collection](https://www.loganpendragonforge.com/open-source/). Licensed under the [MIT License](LICENSE).
+
+## Compare drafts (1.1)
+
+`chapter-shape new.json --compare old.json --format json` compares two explicitly
+supplied JSON drafts, each with its own `text` field. Exact, trimmed headings pair
+only when unique in both drafts. Rows follow the earlier draft's order, followed by
+unpaired new chapters. Deltas are new minus old words/scenes and dialogue percentage
+points. `unchanged` means these measured values agree, not that the prose is identical.
+
+Duplicate headings produce separate `ambiguous-heading` review rows for every
+occurrence on each side. Removed or renamed and added or renamed headings remain
+unpaired; no fuzzy title matching is attempted. Reordering unique headings still
+pairs them. No-heading text is a single `Untitled` chapter. Text before the first
+heading is not a chapter. Chapters start at Markdown `# ` headings; standalone
+`***` (with optional spaces) and `---` mark scenes. Dialogue share remains a
+quote-based estimate, including multiline quotes. It cannot identify speakers or
+validate narrative rhythm. Both drafts are read locally and never modified.
