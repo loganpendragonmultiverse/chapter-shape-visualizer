@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from chapter_shape_visualizer.cli import main
 from chapter_shape_visualizer.core import analyze, compare_drafts, render_markdown
 
@@ -57,8 +59,6 @@ def test_cli_comparison_preserves_sources(tmp_path, capsys):
 
 
 def test_malformed_comparison_drafts_reject():
-    import pytest
-
     for bad in ([], {"text": 7}, {}, {"text": ""}):
         with pytest.raises(ValueError):
             compare_drafts(bad, {"text": "# One\na"})
