@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chapter-shape-visualizer"
-version = "1.1.0"
+version = "1.1.1"
 description = "Measure chapter length, scene count, dialogue share, and structural rhythm from supplied manuscript text."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -36,3 +36,7 @@ omit = ["src/*/__main__.py"]
 testpaths = ["tests"]
 addopts = "--cov=chapter_shape_visualizer --cov-branch --cov-report=term-missing --cov-fail-under=90"
 
+
+[tool.setuptools.data-files]
+"share/doc/chapter-shape-visualizer" = ["README.md", "CHANGELOG.md", "DEVELOPMENT.md", "TESTING.md"]
+"share/doc/chapter-shape-visualizer/examples" = ["examples/sample.json", "examples/earlier-draft.json"]

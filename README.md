@@ -57,3 +57,13 @@ quote-based estimate, including multiline quotes. It cannot identify speakers or
 validate narrative rhythm. Both drafts are read locally and never modified.
 
 Draft measurement normalizes LF, CRLF and CR line endings in memory. A supplied `--compare` file must contain a draft object; JSON `null` or another malformed value rejects rather than disabling comparison.
+
+## Version 1.1.1 maintenance
+
+Report files are created exclusively: an existing file, dangling symbolic link, or a file that appears before creation is rejected. Input files are never rewritten. This does not promise an atomic defense against replacement of a parent directory by a hostile process.
+
+The installed wheel and source archive include README, CHANGELOG, DEVELOPMENT, TESTING and both examples under `share/doc/chapter-shape-visualizer`. Compare the synthetic earlier draft with the current sample:
+
+```bash
+chapter-shape examples/sample.json --compare examples/earlier-draft.json --format json
+```
