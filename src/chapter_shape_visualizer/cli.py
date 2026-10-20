@@ -27,9 +27,10 @@ def main(argv: list[str] | None = None) -> int:
         report = analyze(data, before=before)
         rendered = render_json(report) if args.format == "json" else render_markdown(report)
         if args.output:
-            if args.output.exists():
+            if args.output.is_symlink() or args.output.exists():
                 raise ValueError(f"output already exists: {args.output}")
-            args.output.write_text(rendered, encoding="utf-8")
+            with args.output.open("x", encoding="utf-8") as destination:
+                destination.write(rendered)
         else:
             sys.stdout.write(rendered)
     except (TypeError, OSError, UnicodeError, ValueError, json.JSONDecodeError) as exc:

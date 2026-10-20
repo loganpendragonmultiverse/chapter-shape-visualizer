@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 - 2026-10-20
+
+- Check the output leaf for symbolic links before exclusive creation, including on Windows.
+
+- Prevent output creation from following dangling symlinks or replacing files created after the initial check; package complete handoff docs and a comparison example.
+
 ## 1.1.0 - 2026-10-15
 
 - Preserve scene counts across LF, CRLF and CR drafts; reject malformed explicit comparison files.
