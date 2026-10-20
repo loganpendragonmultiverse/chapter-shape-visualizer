@@ -60,7 +60,7 @@ Draft measurement normalizes LF, CRLF and CR line endings in memory. A supplied 
 
 ## Version 1.1.1 maintenance
 
-Report files are created exclusively: an existing file, dangling symbolic link, or a file that appears before creation is rejected. Input files are never rewritten. This does not promise an atomic defense against replacement of a parent directory by a hostile process.
+Report files are created exclusively: an existing file, dangling symbolic link, or a file that appears before creation is rejected. Input files are never rewritten. This does not promise an atomic defense against replacement of an output leaf or parent directory by a hostile process.
 
 The installed wheel and source archive include README, CHANGELOG, DEVELOPMENT, TESTING and both examples under `share/doc/chapter-shape-visualizer`. Compare the synthetic earlier draft with the current sample:
 
